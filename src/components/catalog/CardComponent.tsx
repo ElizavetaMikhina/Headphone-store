@@ -10,10 +10,11 @@ interface CardProps {
 }
 
 const CardComponent: React.FC<CardProps> = ({ img, title, price, rate, stock }) => {
-    const { increaseCounter } = useCounter();
+    const { increaseCounter, addToCart } = useCounter();
 
     const handleBuyButtonClick = () => {
         increaseCounter();
+        addToCart({ img, title, price, quantity: 1, stock, updateTotalPrice: () => {} });
     };
 
     return (

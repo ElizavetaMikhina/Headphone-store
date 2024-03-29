@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 
 export interface CartItemProps {
-    name: string;
+    img: string;
+    title: string;
     price: number;
     quantity: number;
-    imageUrl: string;
+    stock?: number;
     updateTotalPrice: (newTotalPrice: number) => void;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ name, price, quantity, imageUrl, updateTotalPrice }) => {
+const CartItem: React.FC<CartItemProps> = ({ img, title, price, quantity, stock, updateTotalPrice }) => {
     const [itemQuantity, setItemQuantity] = useState(quantity);
 
     const decreaseQuantity = () => {
@@ -26,7 +27,7 @@ const CartItem: React.FC<CartItemProps> = ({ name, price, quantity, imageUrl, up
     return (
         <div className="cart-item">
             <div className="cart-item__image-container">
-                <img className="cart-item__image" src={imageUrl} alt={name} />
+                <img className="cart-item__image" src={img} alt={title} />
                 <div className="cart-item__quantity-container">
                     <button className='cart-item__quantity-minus' onClick={decreaseQuantity}>
                         <img src="/img/icon/minus.svg" alt="убрать" />
@@ -38,8 +39,8 @@ const CartItem: React.FC<CartItemProps> = ({ name, price, quantity, imageUrl, up
                 </div>
             </div>
             <div className="cart-item__details">
-                <h3 className="cart-item__name">{name}</h3>
-                <p className="cart-item__price">{price} ₽</p>
+                <h3 className="cart-item__name">{title}</h3>
+                <p className="cart-item__price">{stock ? stock : price} ₽</p>
             </div>
             <div className="cart-item__delete-container">
                 <button>
